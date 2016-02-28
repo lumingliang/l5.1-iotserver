@@ -9,9 +9,12 @@
         content="width=device-width, initial-scale=1">
 		@if( isset($mon))
 		<meta name="iot-data" content="{{$data}}">
-  <title>{{$title}}</title>
+        @endif
+		@if( isset($his))
+		<meta name="iot-data" content="{{$data_all}}">
         @endif
 
+  <title>{{$title}}</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
 
@@ -112,12 +115,12 @@
   <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
     <div class="am-offcanvas-bar admin-offcanvas-bar">
       <ul class="am-list admin-sidebar-list">
-        <li><a href="#"><span class="am-icon-home"></span>实时状态</a></li>
+		  <li><a href="{{ url('iot/monitor') }}"><span class="am-icon-home"></span>实时状态</a></li>
         <li class="admin-parent">
           <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 历史数据 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
           <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
 			@foreach($sensors as $sensor)
-			<li><a href="#"><span class="am-icon-flag"></span>{{$sensor->name}}</a></li>
+			<li><a href="{{ url('iot/data/'.$sensor->id) }}"><span class="am-icon-flag"></span>{{$sensor->name}}</a></li>
 			@endforeach
           </ul>
         </li>

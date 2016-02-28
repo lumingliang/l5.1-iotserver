@@ -50,19 +50,31 @@ Route::get('echarts', function() {
 	return view('echarts')->withTitle('iot管理系统');
 });
 
-//Route::group(["namespace" => "Iot", "prefix" => "iot", "middleware" => "auth.basic"], function() {
-Route::group(["namespace" => "Iot", "prefix" => "iot" ], function() {
+
+Route::group(["namespace" => "Iot", "prefix" => "iot", "middleware" => "auth.basic"], function() {
+//Route::group(["namespace" => "Iot", "prefix" => "iot" ], function() {
 	Route::get('/monitor', 'MonitorController@index');
 	Route::get('/monitor/{id}', 'MonitorController@show')->where('id', '[0-9]+');
 	Route::get('/sensor/create', 'SensorController@create');
 	Route::post('/sensor', 'SensorController@store');
 
 	Route::get('/history/{id}', 'HistoryController@show')->where('id', '[0-9]+');
+	Route::get('/data', 'DataController@store');
+	Route::get('/data/{sensor_id}', 'DataController@index');
+	//Route::get('/sensor/{sensor_id}/data/{day}', 'DataController@index');
+
+	// Route::get('/data', function() {
+
+		// //Data::create('sensor_id')
+		// var_dump(Request::all());
+	// });
 });
 
 
 use YuanChao\Editor\text;
 Route::get('/', function() {
+	var_dump(explode(':', '33:44'));
+	exit;
 	return view('iot.monitor');
 	echo Markdown::text('<h2>welcom to the index !</h2>');  
 });
