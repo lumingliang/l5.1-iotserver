@@ -57,10 +57,14 @@ Route::group(["namespace" => "Iot", "prefix" => "iot", "middleware" => "auth.bas
 	Route::get('/monitor/{id}', 'MonitorController@show')->where('id', '[0-9]+');
 	Route::get('/sensor/create', 'SensorController@create');
 	Route::post('/sensor', 'SensorController@store');
+	Route::get('/sensor/{id}/edit', 'SensorController@edit');
+	Route::put('/sensor/{id}', 'SensorController@update');
 
 	Route::get('/history/{id}', 'HistoryController@show')->where('id', '[0-9]+');
 	Route::get('/data', 'DataController@store');
 	Route::get('/data/{sensor_id}', 'DataController@index');
+	Route::get('manage', 'manageController@index');
+	Route::get('sensorDel/{id}', 'SensorController@destroy');
 	//Route::get('/sensor/{sensor_id}/data/{day}', 'DataController@index');
 
 	// Route::get('/data', function() {
@@ -68,6 +72,10 @@ Route::group(["namespace" => "Iot", "prefix" => "iot", "middleware" => "auth.bas
 		// //Data::create('sensor_id')
 		// var_dump(Request::all());
 	// });
+});
+
+route::get('session', function() {
+	var_dump(Session::all());
 });
 
 

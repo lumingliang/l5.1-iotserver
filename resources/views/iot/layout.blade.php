@@ -125,6 +125,7 @@
           </ul>
         </li>
 		<li><a href="{{url('iot/sensor/create')}}"><span class="am-icon-file"></span> 新增传感器</a></li>
+				<li><a href="{{url('iot/manage')}}"><span class="am-icon-file"></span> 系统管理</a></li>
       </ul>
 
       <div class="am-panel am-panel-default admin-sidebar-panel">
@@ -171,7 +172,9 @@
 <!--<![endif]-->
 <script src="{{url('assets/js/amazeui.min.js')}}"></script>
 <!--<script src="{{url('js/echarts.min.js')}}"></script>-->
+@if(isset($mon))
 <script src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+@endif
 <script src="{{url('js/date-patch.js')}}" ></script>
 
 <script type="text/javascript">

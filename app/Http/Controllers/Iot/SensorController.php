@@ -81,7 +81,14 @@ class SensorController extends Controller
      */
     public function edit($id)
     {
-        //
+		foreach( session('sensors') as $sen ) {
+			if($sen->id == $id) {
+				$sensor = $sen;
+				//echo $sensor;
+				break;
+			}
+		}
+        return view('iot.sensorManage')->withTitle('管理传感器')->with('user', session('user') )->with('sensors', session('sensors'))->with('sensor', $sensor); 
     }
 
     /**
@@ -93,7 +100,34 @@ class SensorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //echo 'y';
+		$sensor = Sensor::find($id);
+		var_dump($sensor);
+		//var_dump($request->all());
+		//exit;
+		$sensor->name = $request->name;
+		$sensor->unit = $request->unit;
+		$sensor->math = $request->math;
+		$sensor->save();
+
+		Session::forget('sensors');
+
+		$sensors = User::find(session('userId'))->sensors;
+		Session::put('sensors', $sensors);
+
+		// var_dump(Session::all());
+		// exit;
+
+		foreach( session('sensors') as $sen ) {
+			if($sen->id == $id) {
+				$sensor = $sen;
+				//echo $sensor;
+				break;
+			}
+		}
+
+		return redirect('iot/monitor')->with('success', true)->withTitle('修改成功')->with('user', session('user') )->with('sensors', session('sensors'))->with('sensor', $sensor); 
+
     }
 
     /**
@@ -104,6 +138,15 @@ class SensorController extends Controller
      */
     public function destroy($id)
     {
-        //
+		Sensor::destroy($id);
+		// foreach( session('sensors') as $key => $sen ) {
+			// if($sen->id == $id) {
+				// unset(session('sensors')[$key]);
+				// //echo $sensor;
+				// break;
+			// }
+		// }
+		return redirect('/iot/monitor')->withTitle('系统管理')->with('user', session('user') )->with('sensors', session('sensors')); 
+
     }
 }
