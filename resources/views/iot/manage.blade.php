@@ -1,6 +1,47 @@
 @extends('iot.layout')
 @section('admin-content')
 <div class="am-g">
+
+
+
+	<div class="am-u-lg-6">
+
+<div class="am-panel am-panel-default">
+          <div class="am-panel-hd am-cf" data-am-collapse="{target: '#sensor-info'}">传感器信息<span class="am-icon-chevron-down am-fr" ></span></div>
+
+          <div id="sensor-info" class="am-panel-bd am-collapse am-in">
+
+                <strong><span class="am-icon-upload"></span>您拥有以下传感器</strong>
+
+<ul class="am-list admin-content-file">
+	<!-- <li><strong><span class="am-icon-upload"></span>您拥有以下传感器</strong> </li> -->
+	@foreach( $sensors as $sensor )
+              <li>
+				  <strong><span class="am-icon-upload"></span>{{ $sensor->name }}</strong>
+				<br/><br>
+				<p><button class="am-btn am-btn-primary" data-am-popover="{content: '{{ 'sensor_id:'.$sensor->id }}'}">点击显示专有id</button></p>
+				<div class="am-cf">
+                  <div class="am-fr">
+					  <a role="button" href="{{ url('iot/sensor/'.$sensor->id.'/edit') }}" type="button" class="am-btn am-btn-primary am-btn-xs"><span class="am-icon-pencil"></span></a>
+					  <a role="button" href="{{ url('iot/sensorDel/'.$sensor->id) }}" class="am-btn am-btn-primary am-btn-xs ">删除</a>
+
+                  </div>
+                </div>
+
+
+
+              </li>
+	@endforeach
+
+	</ul>
+    </div>
+	<!-- end user-info-panel-bd -->
+
+	</div>
+	<!-- end user-info-panel -->
+</div> <!-- end lg-6 -->
+
+
 	<div class="am-u-lg-6">
 
 <div class="am-panel am-panel-default">
@@ -42,47 +83,6 @@
 	</div>
 	<!-- end user-info-panel -->
 </div> <!-- end lg-6 -->
-
-
-
-	<div class="am-u-lg-6">
-
-<div class="am-panel am-panel-default">
-          <div class="am-panel-hd am-cf" data-am-collapse="{target: '#sensor-info'}">传感器信息<span class="am-icon-chevron-down am-fr" ></span></div>
-
-          <div id="sensor-info" class="am-panel-bd am-collapse am-in">
-
-                <strong><span class="am-icon-upload"></span>您拥有以下传感器</strong>
-
-<ul class="am-list admin-content-file">
-	<!-- <li><strong><span class="am-icon-upload"></span>您拥有以下传感器</strong> </li> -->
-	@foreach( $sensors as $sensor )
-              <li>
-				  <strong><span class="am-icon-upload"></span>{{ $sensor->name }}</strong>
-				<br/><br>
-				<p><button class="am-btn am-btn-primary" data-am-popover="{content: '{{ 'sensor_id:'.$sensor->id }}'}">点击显示专有id</button></p>
-				<div class="am-cf">
-                  <div class="am-fr">
-					  <a href="{{ url('iot/sensor/'.$sensor->id.'/edit') }}" type="button" class="am-btn am-btn-default am-btn-xs"><span class="am-icon-pencil"></span></a>
-					  <a type="button" href="{{ url('iot/sensorDel/'.$sensor->id) }}" class="am-btn am-btn-default am-btn-xs delete">删除</a>
-
-                  </div>
-                </div>
-
-
-
-              </li>
-	@endforeach
-
-	</ul>
-    </div>
-	<!-- end user-info-panel-bd -->
-
-	</div>
-	<!-- end user-info-panel -->
-</div> <!-- end lg-4 -->
-
-
 
 </div> 
 <!-- end am-g -->

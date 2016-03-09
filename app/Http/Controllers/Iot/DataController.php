@@ -17,18 +17,29 @@ class DataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	// following is not use now
     public function index($sensor_id)
     {
         //echo $sensor_id;
 		//echo date('y-m-d H:i:s');
+
+		foreach( session('sensors') as $sen ) {
+			if($sen->id == $sensor_id) {
+				$sensor = $sen;
+				//echo $sensor;
+				break;
+			}
+		}
+
 		$form = date('y-m-d ').'00:00:00';
 		$form = '16-02-27 ';
 		$to = date('y-m-d ').'23:59:59';
+		
 		$data = Sensor::find($sensor_id)->datas()->whereBetween('created_at', [$form, $to])->get();
-		$t = json_encode($data);
+		$t = json_encode([$data, $sensor]);
 		//var_dump(json_encode($data));
 		//var_dump($data);
-		return view('iot.history')->with('user', session('user'))->with('sensors', session('sensors'))->with('data_all', $t)->with('his', true)->withTitle('历史数据')->with('datas', $data);
+		return view('iot.history')->with('user', session('user'))->with('sensors', session('sensors'))->with('data_all', $t)->with('his', true)->withTitle('历史数据')->with('datas', $data)->with('sensor', $sensor);
 		
 		// echo $form;
 		// echo $to;

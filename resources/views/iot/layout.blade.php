@@ -99,6 +99,9 @@
   .charts-width {
     height: 300px;
   }
+  .admin-content {
+	  padding: 50px;
+  }
   </style>
   @yield('css')
 </head>
@@ -120,7 +123,7 @@
           <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 历史数据 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
           <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
 			@foreach($sensors as $sensor)
-			<li><a href="{{ url('iot/data/'.$sensor->id) }}"><span class="am-icon-flag"></span>{{$sensor->name}}</a></li>
+			<li><a href="{{ url('iot/history/'.$sensor->id) }}"><span class="am-icon-flag"></span>{{$sensor->name}}</a></li>
 			@endforeach
           </ul>
         </li>
@@ -172,7 +175,7 @@
 <!--<![endif]-->
 <script src="{{url('assets/js/amazeui.min.js')}}"></script>
 <!--<script src="{{url('js/echarts.min.js')}}"></script>-->
-@if(isset($mon))
+@if(isset($mon)|isset($his))
 <script src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
 @endif
 <script src="{{url('js/date-patch.js')}}" ></script>

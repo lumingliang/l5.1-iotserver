@@ -91,7 +91,7 @@ var monitor = function(option) {
 						console.log(date);
 						sensor_options[key].xAxis.data.push(date);
 					} else {
-						sensor_options[key].series[0].data = data[key].value;
+						sensor_options[key].series[0].data[0].value = data[key].value.toString().substring(0,4);
 					}
 					sensors[key].setOption(sensor_options[key]);
 					if(option.dosomething) {
